@@ -6,7 +6,7 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Dosis|Krona+One" rel="stylesheet">
-	<link rel="stylesheet" href="./friendstyle.css">
+	<link rel="stylesheet" type="text/css" href="friendstyle.css">
 
 	<!-- <script src="https://code.jquery.com/jquery.js"></script> -->
 
@@ -159,7 +159,7 @@
 		<hr>
 	    <footer class="footer">
 	      <div class="container">
-		        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/ehlerorngard/friend-finder">GitHub Repo</a></p>
+		        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/ehlerorngard/friend-finder" target="_blank">GitHub Repo</a></p>
 	      </div>
 	    </footer>
 
@@ -190,13 +190,16 @@
   <script type="text/javascript">
 
     // Capture the form inputs 
-    $("#submit").on("click", function(){
-
+    $("#submit").on("click", function(event){
+    	event.preventDefault();
     	// Form validation
+    	console.log($("#name").val());
+
     	function validateForm() {
 		  var isValid = true;
 		  $('.form-control').each(function() {
 		    if ($(this).val() === "")
+		    	console.log("that's a false");
 		        isValid = false;
 		  });
 
@@ -205,6 +208,7 @@
 		  	if ($(this).val() === "")
 		  		isValid = false
 		  })
+		  console.log("form is valid: " + isValid);
 		  return isValid;
 		}
 
@@ -213,14 +217,15 @@
 	    	var userResponses = {
 	    		name: $("#name").val(),
 	    		photo: $("#photo").val(),
-	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(), ]
-	    	}
-
+	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
+	    	};
+	    	console.log(userResponses);
 	    	// Grab the URL of the website
 	    	var currentURL = window.location.origin;
 
 	    	// AJAX post the data to the friends API. 
-	    	$.post(currentURL + "/api/friends", userResponses, function(data){
+	    	// TRY with JUST the string, NO currentURL....
+	    	$.post(currentURL + "/api/friends", userResponses, function(data) {
 
 	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
 	    		$("#matchName").text(data.name);
@@ -231,9 +236,11 @@
 
 	    	});
 		}
-		else
+		else if (validateForm() === false)
 		{
+			console.log('SOMETHING... ANYTHING');
 			// Show the alert that he/she must complete all fields
+			console.log("it thinks the validateForm is false...");
 			$("#incomplete").attr("class", "alert alert-warning fade show");
 		}
     	

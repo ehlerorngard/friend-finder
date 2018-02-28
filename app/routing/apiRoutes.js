@@ -5,30 +5,26 @@ var router = express.Router();
 
 
 router.get("/friends", function(req, res) {
-  var chosen = req.params.characters;
     res.json(friends);
 
     // for (var i = 0; i < friends.allFriends.length; i++) {
     // }
-
 });
 
 // create new user profile and match with compatible friend
 router.post("/friends", function(req, res) {
 
 // run compatibility algorithm
+	console.log(req.body);
+	var newFriend = req.body;
 
-
-
-
-
-  var newFriend = req.body;
-
-  console.log(newFriend);
-
-  friends.allFriends.push(newFriend);
-
-  res.json(compatiPal);
+	console.log("Here are the scores: " + newFriend.userResponses.scores);
+	console.log(newFriend);
+	
+	// friends.push(newFriend);
+	var compatiPal = { name: "Harry", photo: "http://www.animalspot.net/wp-content/uploads/2015/05/Pronghorn-Antelope.jpg" };
+	res.send(compatiPal);
+	// res.json(compatiPal);
 });
 
 

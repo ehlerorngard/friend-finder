@@ -5,16 +5,15 @@ var allFriends = [
 	"scores":[1,2,5,3]
 },
 {
-	"name":"",
+	"name":"Davide",
 	"photo":"",
 	"scores":[]
 },
 {
-	"name":"",
+	"name":"Caoilfhionn",
 	"photo":"",
 	"scores":[]
 }
 ];
-
 
 module.exports = allFriends;
