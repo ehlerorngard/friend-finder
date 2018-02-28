@@ -21,5 +21,4 @@ require("./app/routing/htmlRoutes")(app);
 // require("./app/routing/apiRoutes")(app);
 
 
-
-app.listen(3004);
+app.listen(process.env.PORT || 3004);
