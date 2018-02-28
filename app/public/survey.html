@@ -170,7 +170,7 @@
 	    <!-- Modal content-->
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <a type="button" class="close closeout" data-dismiss="modal" href="/">&times;</a>
 	        <h2 class="modal-title">The best matching of a friend for you is...</h2>
 	      </div>
 	      <div class="modal-body">
@@ -178,7 +178,7 @@
 	        <img id="matchImg" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="" width="400">
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+	        <a type="button" class="btn btn-default closeout" data-dismiss="modal" href="/">close</a>
 	      </div>
 	    </div>
 
@@ -202,11 +202,9 @@
 		  });
 
 		  $('.dropdown').each(function() {
-
 		  	if ($(this).val() === "")
 		  		isValid = false;
 	  			console.log("dropdowns are valid: " + isValid);
-
 		  })
 		  console.log("form is valid: " + isValid);
 		  return isValid;
@@ -219,13 +217,15 @@
 	    		photo: $("#photo").val(),
 	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
 	    	};
-	    	console.log(userResponses);
+	    	console.log("html side: " + userResponses);
 	    	// Grab the URL of the website
 	    	var currentURL = window.location.origin;
 
 	    	console.log(currentURL + "/api/friends");
-	    	// AJAX post the data to the friends API. 
-	    	// TRY with JUST the string, NO currentURL....
+	    	console.log("scores: " + userResponses.scores);
+
+	    	console.log(userResponses);
+
 	    	$.post(currentURL + "/api/friends", userResponses, function(data) {
 	    		console.log("well, it's reading this...");
 
@@ -248,6 +248,13 @@
     	
     	return false;
     });
+    $('.closeout').on('click', function (e) {
+    	$("#matchModal").modal('hide');
+    	$('#myModal').on('hidden.bs.modal', function (e) {
+	    	window.location.href = '/';
+    	});
+    });
+
 
 
   </script>
