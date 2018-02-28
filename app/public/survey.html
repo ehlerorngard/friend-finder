@@ -202,11 +202,9 @@
 		  });
 
 		  $('.dropdown').each(function() {
-
 		  	if ($(this).val() === "")
 		  		isValid = false;
 	  			console.log("dropdowns are valid: " + isValid);
-
 		  })
 		  console.log("form is valid: " + isValid);
 		  return isValid;
@@ -219,13 +217,15 @@
 	    		photo: $("#photo").val(),
 	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
 	    	};
-	    	console.log(userResponses);
+	    	console.log("html side: " + userResponses);
 	    	// Grab the URL of the website
 	    	var currentURL = window.location.origin;
 
 	    	console.log(currentURL + "/api/friends");
-	    	// AJAX post the data to the friends API. 
-	    	// TRY with JUST the string, NO currentURL....
+	    	console.log("scores: " + userResponses.scores);
+
+	    	console.log(userResponses);
+
 	    	$.post(currentURL + "/api/friends", userResponses, function(data) {
 	    		console.log("well, it's reading this...");
 

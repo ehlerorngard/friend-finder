@@ -5,7 +5,7 @@ var path = require("path");
 
 var app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // my local friendstyle.css file did not link unitl i did this...
