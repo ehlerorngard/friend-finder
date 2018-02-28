@@ -3,28 +3,15 @@ var friends = require("../data/friends");
 
 var router = express.Router();
 
-
 router.get("/friends", function(req, res) {
     res.json(friends);
-
-    // for (var i = 0; i < friends.allFriends.length; i++) {
-    // }
 });
 
+//=================================
 // create new user profile and match with compatible friend
 router.post("/friends", function(req, res) {
-
-// run compatibility algorithm
 	var newFriend = req.body;
-
-	console.log(newFriend);
-	console.log(newFriend.scores);
-
-	console.log("newFriend: ");
-	console.log(newFriend);
-	console.log("name: " + newFriend.name);
-	console.log("photo: " + newFriend.photo);
-	
+	// convert user's answers to integers
 	var newArray = [];
 	var integers = function(scores){
 		for (i = 0; i < scores.length; i++) {
@@ -33,16 +20,13 @@ router.post("/friends", function(req, res) {
 	};
 	integers(newFriend.scores);
 	newFriend.scores = newArray;
-
-	console.log(newFriend);
-	
+	// this will be sent back in the response	
 	var compatiPal;
 
 //================================
-//==== main matching algorithm ===
+//======= matching algorithm =====
 //================================
 	function findMatch(){
-		var matchesArray = [];
 		var theWinner;
 		var lowestAgg;
 		for (i = 0; i < friends.length; i++){
@@ -59,7 +43,6 @@ router.post("/friends", function(req, res) {
 			if (lowestAgg == undefined){
 				lowestAgg = aggregate;
 				theWinner = possMatch;
-				matchesArray.unshift();
 			}
 			else if (aggregate < lowestAgg){
 				lowestAgg = aggregate;
@@ -70,19 +53,10 @@ router.post("/friends", function(req, res) {
 		compatiPal = theWinner;
 	}
 	findMatch();
-
-	// var compatiPal = { name: "Harry", photo: "http://www.animalspot.net/wp-content/uploads/2015/05/Pronghorn-Antelope.jpg" };
-	
 	friends.push(newFriend);
-	// res.send(compatiPal);
 	res.json(compatiPal);
 });
-// 
-// 
+
+
 module.exports = router;
-// 
-// module.exports = function(app) {
-	// app.post("/api/friends", function(req, res){
-		// res.json({ name: "Harry", photo: "http://www.animalspot.net/wp-content/uploads/2015/05/Pronghorn-Antelope.jpg" });
-	// });}
-// 
+
