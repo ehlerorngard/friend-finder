@@ -18,15 +18,21 @@ router.post("/friends", function(req, res) {
 	console.log(req.body);
 	var newFriend = req.body;
 
-	console.log("Here are the scores: " + newFriend.userResponses.scores);
+	console.log("Here are the scores: " + newFriend.userResponses);
 	console.log(newFriend);
-	
+	// 
 	// friends.push(newFriend);
 	var compatiPal = { name: "Harry", photo: "http://www.animalspot.net/wp-content/uploads/2015/05/Pronghorn-Antelope.jpg" };
-	res.send(compatiPal);
-	// res.json(compatiPal);
+
+	// res.send(compatiPal);
+	res.json(compatiPal);
 });
-
-
+// 
+// 
 module.exports = router;
-
+// 
+// module.exports = function(app) {
+	// app.post("/api/friends", function(req, res){
+		// res.json({ name: "Harry", photo: "http://www.animalspot.net/wp-content/uploads/2015/05/Pronghorn-Antelope.jpg" });
+	// });}
+// 

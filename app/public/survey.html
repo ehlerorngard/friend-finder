@@ -8,9 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Dosis|Krona+One" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="friendstyle.css">
 
-	<!-- <script src="https://code.jquery.com/jquery.js"></script> -->
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
@@ -173,11 +171,11 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h2 class="modal-title">best match</h2>
+	        <h2 class="modal-title">The best matching of a friend for you is...</h2>
 	      </div>
 	      <div class="modal-body">
 	        <h2 id="matchName"></h2>
-	        <img id="matchImg" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+	        <img id="matchImg" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="" width="400">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
@@ -199,14 +197,16 @@
 		  var isValid = true;
 		  $('.form-control').each(function() {
 		    if ($(this).val() === "")
-		    	console.log("that's a false");
 		        isValid = false;
+				console.log("input fields are valid: " + isValid);
 		  });
 
 		  $('.dropdown').each(function() {
 
 		  	if ($(this).val() === "")
-		  		isValid = false
+		  		isValid = false;
+	  			console.log("dropdowns are valid: " + isValid);
+
 		  })
 		  console.log("form is valid: " + isValid);
 		  return isValid;
@@ -223,9 +223,11 @@
 	    	// Grab the URL of the website
 	    	var currentURL = window.location.origin;
 
+	    	console.log(currentURL + "/api/friends");
 	    	// AJAX post the data to the friends API. 
 	    	// TRY with JUST the string, NO currentURL....
 	    	$.post(currentURL + "/api/friends", userResponses, function(data) {
+	    		console.log("well, it's reading this...");
 
 	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
 	    		$("#matchName").text(data.name);
@@ -239,8 +241,8 @@
 		else if (validateForm() === false)
 		{
 			console.log('SOMETHING... ANYTHING');
-			// Show the alert that he/she must complete all fields
 			console.log("it thinks the validateForm is false...");
+			// Show the alert that he/she must complete all fields
 			$("#incomplete").attr("class", "alert alert-warning fade show");
 		}
     	
