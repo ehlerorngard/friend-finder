@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // my local friendstyle.css file did not link unitl i did this...
-// app.use('/', express.static(__dirname + "/app/public"));
+app.use('/', express.static(__dirname + "/app/public"));
 
 var apiRoutes = require("./app/routing/apiRoutes.js");
 

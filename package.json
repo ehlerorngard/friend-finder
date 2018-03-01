@@ -1,7 +1,7 @@
 {
   "name": "friend-finder",
   "version": "1.0.0",
-  "description": "an app to match up new friend with a simple compatibility algorithm",
+  "description": "an app to match up new friends with a simple compatibility algorithm",
   "main": "apiRoutes.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
